@@ -1,0 +1,11 @@
+Instructions:
+
+git clone (repository)
+git add (file name here)
+git config --global user.email (email)
+git config --global user.name (name)
+git commit -m "push desc"
+
+git remote add origin
+git push -u origin master
+
