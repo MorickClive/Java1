@@ -1,0 +1,28 @@
+File Header:	Employee Writer.
+Employee List:
+
+Employee #0
+	Elis
+	25
+	Car_Mechanic
+
+Employee #1
+	Charlotte
+	23
+	Receptionist
+
+Employee #2
+	John
+	32
+	Sales_Manager
+
+Employee #3
+	Maxwell
+	53
+	Business_Executive
+
+Employee #4
+	James
+	25
+	Graphic_Designer
+
