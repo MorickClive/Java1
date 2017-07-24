@@ -1,5 +1,7 @@
 package Library;
 
+import java.util.ArrayList;
+
 public class Map extends Item{
 
 	String 	location = null, 
@@ -53,11 +55,9 @@ public class Map extends Item{
 							language : this.language;
 	}
 	@Override
-	public void updateLoan(int daysLoaned, int maxLoan) {
+	public void updateLoan(int daysLoaned) {
 		this.setDaysLoaned(daysLoaned);
-		this.setMaxLoan(maxLoan);
-	}
-	
+	}	
 
 	
 }

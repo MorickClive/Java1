@@ -83,5 +83,16 @@ private	float	outstandingFees = 0;
 	public void setContactNo(int contactNo) {
 		this.contactNo = contactNo;
 	}
+
+	public void getAccountOverview(){
+		
+		System.out.println(getName() + " account overview:");
+		System.out.println(	"\tID: " + getID() + "\n" +
+							"\tName: " + getName() + "\n" +
+							"\tAge: " + getAge() + "\n" +
+							"\tContact number: " + getContactNo() + "\n" +
+							"\tTotal pending books: " + getBorrowList().size() + "\n");
+		
+	}
 	
 }

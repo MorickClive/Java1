@@ -1,5 +1,7 @@
 package Library;
 
+import java.util.ArrayList;
+
 public class Book extends Item {
 	
 	String genre = null;
@@ -39,8 +41,7 @@ public class Book extends Item {
 		this.isHardback = 		isHardback;	
 	}
 
-	public void updateLoan(int daysLoaned, int maxLoan) {
+	public void updateLoan(int daysLoaned) {
 		this.setDaysLoaned(daysLoaned);
-		this.setMaxLoan(maxLoan);
 	}
 }

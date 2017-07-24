@@ -1,5 +1,8 @@
 package Library;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public abstract class Item {
 	protected static int total_Items = 0;
 	protected int ID = 0;
@@ -9,7 +12,7 @@ public abstract class Item {
 					material = null; // this particular object is considered (glass, paper, cardboard, gloss paper, etc)
 	
 	// loaned
-	protected int			customer_ID = 0; // who is it loaned by
+	protected int		customer_ID = 0; // who is it loaned by
 	protected boolean 	isLoaned = false; // is it in the library, or out?
 	protected int 		daysLoaned = 0, // currently loaned time in days
 						maxLoan = 15, // think in terms of days
@@ -116,8 +119,18 @@ public abstract class Item {
 	////
 	// Behaviours
 	///
-
+	
+	public Customer returnOwner(ArrayList<Customer> CustomerList) {
+		
+		//if(getCustomer_ID() == 0){ System.out.println("Error no ID.");} // Debugging; you can now return books that are unowned without breaking the system.
+		for(int x = 0; x < CustomerList.size(); x++){
+			if(CustomerList.get(x).getID() == getCustomer_ID()){ return CustomerList.get(x);}
+		}
+		
+		return null;
+	}
+	
 	public abstract void updateItem(String title, String item_Type, String material, int price);
-	public abstract void updateLoan(int daysLoaned, int maxLoan);
+	public abstract void updateLoan(int daysLoaned);
 
 }

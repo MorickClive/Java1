@@ -1,5 +1,7 @@
 package Library;
 
+import java.util.ArrayList;
+
 public class Media extends Item{
 	String 	description = null;
 	
@@ -41,9 +43,8 @@ public class Media extends Item{
 								description : this.description;;
 	}
 	@Override
-	public void updateLoan(int daysLoaned, int maxLoan) {
+	public void updateLoan(int daysLoaned) {
 		this.setDaysLoaned(daysLoaned);
-		this.setMaxLoan(maxLoan);
 	}
 
 	

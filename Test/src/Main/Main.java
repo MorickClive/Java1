@@ -16,7 +16,7 @@ public class Main extends Common {
 		//Basic x = new Basic();
 		//Sleep(2000);
 		
-		Intermediate y = new Intermediate();
+		//Intermediate y = new Intermediate();
 		//Sleep(2000);
 		
 		//Advanced z = new Advanced();
@@ -52,13 +52,23 @@ public class Main extends Common {
 		// ERROR, SYSTEM FAILURE
 			//libSystems.getItemSections().get(3).setLoaned(true);
 		// SUPER BAD DAVE
-			///libSystems.checkOutItem(libList.get(2), libCustList.get(0));
-			///libSystems.checkOutItem(libList.get(1), libCustList.get(0));
-			///libSystems.checkOutItem(libList.get(0), libCustList.get(0));
-		
+			//libSystems.checkOutItem(libList.get(0), libCustList.get(0));
+			//libSystems.checkOutItem(libList.get(1), libCustList.get(0));
+			libSystems.checkOutItem(libList.get(2), libCustList.get(0));
+		// IAN wants a book that has already been claimed.
+			libSystems.checkOutItem(libList.get(2), libCustList.get(1));
+			
+		// DAVE takes out a book to return it safely.
 		libSystems.checkOutItem(libList.get(3), libCustList.get(0));
-		
 		libSystems.checkInItem(libList.get(3));
+		
+		// Let's find out more about our users.
+		//libCustList.get(0).getAccountOverview();
+		//libCustList.get(1).getAccountOverview();
+		//libCustList.get(2).getAccountOverview();
+		//libCustList.get(3).getAccountOverview();
+		
+		
 //		 Map map23 = (Map) libList.get(2);
 //		((Map) libList.get(2)).updateItem("Atlas of Denmark", "Plastic", 0, "Denmark", "German");
 		
@@ -67,5 +77,5 @@ public class Main extends Common {
 //			System.out.println("Item Title: " + libList.get(x).getTitle());
 //		}
 	}
-
+	
 }

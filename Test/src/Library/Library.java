@@ -87,22 +87,23 @@ public class Library {
 	
 	public void updateItem_objhandler(Item Object, Item sampleObject){
 //		(String title, String material, int price, String genre, boolean isHardback)
-		if(Object instanceof Book){ 	((Book)Object).updateItem(	sampleObject.getTitle(),
+		if(Object instanceof Book && sampleObject instanceof Book){ 	((Book)Object).updateItem(	sampleObject.getTitle(),
 																	sampleObject.getItem_Type(),
 																	sampleObject.getMaterial(),
 																	sampleObject.getPrice());}
 //		String title, String material, int price, String location, String language
-		if(Object instanceof Map){		((Map)Object).updateItem(	sampleObject.getTitle(),
+		if(Object instanceof Map && sampleObject instanceof Map){		((Map)Object).updateItem(	sampleObject.getTitle(),
 																	sampleObject.getItem_Type(),
 																	sampleObject.getPrice(),
 																	((Map)sampleObject).getLocation(),
 																	((Map)sampleObject).getLanguage());}
 //		String title, String item_Type, String material, int price, String description
-		if(Object instanceof Media){	((Media)Object).updateItem(	sampleObject.getTitle(),
+		if(Object instanceof Media && sampleObject instanceof Media){	((Media)Object).updateItem(	sampleObject.getTitle(),
 																	sampleObject.getItem_Type(),
 																	sampleObject.getMaterial(),
 																	sampleObject.getPrice(),
 																	((Media)sampleObject).getDescription());}
+		//if()
 		}
 	
 	// Customer behaviour
@@ -155,6 +156,7 @@ public class Library {
 					// assign book to customer and declare loaned.
 					itm.setLoaned(true);
 					itm.setCustomer_ID(cstmr.getID());
+
 					cstmr.getBorrowList().add(itm);
 					
 					// inform user
@@ -171,15 +173,16 @@ public class Library {
 				}
 				else{
 					// This book has not been checked in yet
-					System.out.println("We're sorry, but this item hasn't been checked back into the system yet.\n");
-					System.out.println("\t"+"Please hand this item to the receiptionist to check out.");
+					System.out.println("You are unable to borrow books at this time.");
+					System.out.println("We're sorry but this item hasn't been checked back into the system yet.");
+					System.out.println("Please hand this item back to the receiptionist to check out.\n");
 				}
 			}
 			else{
 				// We have too many books!!
-				System.out.println("You are unable to borrow books at this time.");
+				System.out.println("You are unable to borrow more books at this time.");
 				
-				System.out.println("\t"+"You currently have " + cstmr.getBorrowList().size() + " books registered on your account.");
+				System.out.println("\t"+"You currently have " + cstmr.getBorrowList().size() + " books registered on your account.\n");
 				
 			}
 		}
@@ -188,18 +191,39 @@ public class Library {
 			System.out.println("You are unable to borrow books at this time.");
 			
 			System.out.println("\t"+"Unfortunately your account is marked with a £" + cstmr.getOutstandingFees() + " late fee." + "\n\t" +
-								"Please see the receptionist to clear the late fee.");
+								"Please see the receptionist to clear the late fee.\n");
 		}
 	}
 
 	public void checkInItem(Item itm){
 		
-		// Here I would check if the date received matches the date range I can work with.
-		System.out.println("Thank you for returning: '"+itm.getTitle()+"'.\n" + getCustomer(itm.getCustomer_ID()).getName() + "'s account has now been updated.");
+		Customer lender = itm.returnOwner(customerList);
 		
-		itm.updateLoan(0, null);
-		// MUST SET TO FREE
-		itm.setLoaned(false); // no longer loaned
+		if(itm.getCustomer_ID() != 0){
+			// Here I would check if the date received matches the date range I can work with.
+			itm.updateLoan(0); // the book now technically has no days out of library.
+			itm.setLoaned(false); // no longer loaned
+			
+			// Check through our custonmer's borrow list and remove the book in question.
+				// The size of the array now should reflect the change - allowing for new book removals.
+	
+			for(int x = 0; x < lender.getBorrowList().size(); x++){
+				if(lender.getBorrowList().get(x).ID == itm.getID()) {
+					// remove this book from their collection!!
+					// System.out.println("The book '"+ lender.getBorrowList().get(x).getTitle() +"' has been found and removed."); // debug
+					lender.getBorrowList().remove(x);
+					break;
+					}
+			}
+			
+			System.out.println("Thank you for returning: '"+itm.getTitle()+"'.\n" + getCustomer(itm.getCustomer_ID()).getName() + "'s account has now been updated.\n");
+			lender.getAccountOverview();
+		}
+		else{ 
+			// This book is unowned, please put it back or check it out.
+			System.out.println("This book is not owned by any account, please place the book on a service collection trolley.");
+			System.out.println("Alternatively check this book out with the check out option.\n");
+			}
 				
 	}
 
