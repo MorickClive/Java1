@@ -46,6 +46,11 @@ public class Media extends Item{
 	public void updateLoan(int daysLoaned) {
 		this.setDaysLoaned(daysLoaned);
 	}
+	
+	public String detailsMediaFormated(){
+		return 	detailsFormated() +
+				"description:" + getDescription() + ":\n";
+	}
 
 	
 }

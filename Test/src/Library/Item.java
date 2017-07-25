@@ -51,6 +51,9 @@ public abstract class Item {
 	public int getID() {
 		return ID;
 	}
+	public void setID(int x) {
+		this.ID = x;
+	}
 	
 	// Title
 	public String getTitle() {
@@ -128,6 +131,17 @@ public abstract class Item {
 		}
 		
 		return null;
+	}
+	
+	public String detailsFormated(){
+		return 	"ID:" + getID() + "\n" +
+				"Title:" + getTitle() + "\n" +
+				"item_Type:" + getItem_Type() + "\n" +
+				"material:" + getMaterial() + "\n" +
+				"customer ID:" + getCustomer_ID() + "\n" +
+				"isLoaned:" + (isLoaned() ? "true" : "false") + "\n" +
+				"daysLoaned:" + getDaysLoaned() + "\n" +
+				"maxLoan:" + getMaxLoan() + "\n";
 	}
 	
 	public abstract void updateItem(String title, String item_Type, String material, int price);

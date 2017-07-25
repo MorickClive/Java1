@@ -12,6 +12,10 @@ import junit.framework.*;
 
 import Intermediate.Employee;
 import Intermediate.Person;
+import Library.Book;
+import Library.Item;
+import Library.Map;
+import Library.Media;
 
 public class Common {
 	// some system globals
@@ -168,6 +172,47 @@ public class Common {
 		}			
 	}
 
+	public static void FileWriter(ArrayList<Item> itm)
+	{
+			File file = new File("Item_list.txt");
+			try{
+					if(!file.exists())
+					{
+						System.out.println("File Created!!!");
+						file.createNewFile();				
+					}
+					// Declare printer
+					PrintWriter Printer = new PrintWriter(file);
+					
+					Item y;
+					for(int x = 0; x < itm.size(); x++){
+						y = itm.get(x);
+						
+						if(y instanceof Book){
+							Printer.println("Type :" + "Book");
+							Printer.println( ((Book)itm.get(x)).detailsBookFormated() );
+							
+							}
+						if(y instanceof Map){
+							Printer.println("Type :" + "Map");
+							Printer.println( ((Map)itm.get(x)).detailsMapFormated() );
+							
+							}
+						if(y instanceof Media){
+							Printer.println("Type :" + "Media");
+							Printer.println( ((Media)itm.get(x)).detailsMediaFormated() );
+							}
+					}
+					// done with writing
+					Printer.close();
+				}	
+				catch(IOException ex){
+					ex.printStackTrace();			
+				}
+			
+	}
+
+	
 	public static void FileReader()
 	{
 		BufferedReader br = null;
@@ -273,4 +318,6 @@ public class Common {
 		}
 		return myString;
 	}
+	
+	
 }

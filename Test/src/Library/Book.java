@@ -44,4 +44,27 @@ public class Book extends Item {
 	public void updateLoan(int daysLoaned) {
 		this.setDaysLoaned(daysLoaned);
 	}
+	
+	
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public boolean isHardback() {
+		return isHardback;
+	}
+	public void setHardback(boolean isHardback) {
+		this.isHardback = isHardback;
+	}
+	
+
+	
+	public String detailsBookFormated(){
+		return 	detailsFormated() +
+				"genre:" + getGenre() + "\n" +
+				"hardBack:" + isHardback() + "\n";
+	}
+	
 }

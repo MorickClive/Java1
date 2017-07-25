@@ -57,7 +57,12 @@ public class Map extends Item{
 	@Override
 	public void updateLoan(int daysLoaned) {
 		this.setDaysLoaned(daysLoaned);
-	}	
-
+	}
+	
+	public String detailsMapFormated(){
+		return 	detailsFormated() +
+				"location:" + getLocation() + "\n" +
+				"language:" + getLanguage() + "\n";
+	}
 	
 }

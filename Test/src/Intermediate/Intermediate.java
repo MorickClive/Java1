@@ -2,11 +2,16 @@ package Intermediate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 
 
 import Common.Common;
+import Library.Book;
+import Library.Customer;
+import Library.Item;
+import Library.Library;
+import Library.Map;
+import Library.Media;
 
 public class Intermediate extends Common  {
 
@@ -42,6 +47,9 @@ public class Intermediate extends Common  {
 		
 		//writeEmployeeList();
 		//Sleep(500);
+		
+		// Tests the Library system out
+		librarySystem();
 		
 		print("Intermediate tasks are over.\n\n");
 	}
@@ -203,5 +211,67 @@ public class Intermediate extends Common  {
 		
 	}
 	
+	// a rough test of a Library system implemented through classes and saving item lists.
+	static void librarySystem(){
+			// Tests our library system.
+			Library libSystems = new Library("Manchester's Library", 1843);
+			
+			// Add in books.
+			libSystems.addItem(new Book("The Wonders of Seashells", "Paper", "Adventure", true) );
+			libSystems.addItem(new Media("Digital Soundtrack|| Flickswitch (2010)", "Plastic", "A soundtrack from a popular scifi film, released in 2010. Electronic, Drums and Bass."));
+			libSystems.addItem(new Map("Atlas of Germany", "Paper", "Germany", "English") );
+			libSystems.addItem(new Book("Chuckles trip", "Paper", "Action", true) );
+		
+
+			// Add in customers
+			libSystems.customerRegister(new Customer("Dave", null, 74, 0));
+			libSystems.customerRegister(new Customer("Ian", null, 29, 0));
+			libSystems.customerRegister(new Customer("Patrick", null, 17, 0));
+			libSystems.customerRegister(new Customer("Sarah", "Sarah.G1@TTQindustries.com", 35, 0));
+			
+			// lists
+			ArrayList<Item> libList = libSystems.getItemSections();
+			ArrayList<Customer> libCustList = libSystems.getCustomerList();
+			
+			//BAD DAVE! // success
+				//libCustList.get(0).setOutstandingFees(libSystems.getLateFee());
+			// ERROR, SYSTEM FAILURE // success
+				//libSystems.getItemSections().get(3).setLoaned(true);
+			// SUPER BAD DAVE // success
+				//libSystems.checkOutItem(libList.get(0), libCustList.get(0));
+				//libSystems.checkOutItem(libList.get(1), libCustList.get(0));
+				libSystems.checkOutItem(libList.get(2), libCustList.get(0));
+			// IAN wants a book that has already been claimed. // success
+				//libSystems.checkOutItem(libList.get(2), libCustList.get(1));
+				
+			// DAVE takes out a book to return it safely. // success
+			libSystems.checkOutItem(libList.get(3), libCustList.get(0));
+			
+			// Let's write a list of all Items. // success
+			FileWriter(libSystems.getItemSections());
+			libList = libSystems.FileLineReader("Item_list.txt");
+			libSystems.checkInItem(libList.get(3));
+			
+			System.out.println(libList.get(0).detailsFormated());
+			System.out.println(libList.get(1).detailsFormated());
+			System.out.println(libList.get(2).detailsFormated());
+			System.out.println(libList.get(3).detailsFormated());
+		
+			
+			// let's check if we can change Dave's details // success
+				// libSystems.customerUpdate(1, "Tam", null, 45, 0);
+				// libCustList.get(0).getAccountOverview();
+			
+			// let's overwrite a item's details // success // advisory, need to adjust class accessor.
+				// libSystems.updateItem(2, new Media("Super value painting", "Canvas", "A particularly interesting example of perception testing.") );
+				// System.out.println(libList.get(1).detailsFormated());
+			
+			// Let's find out more about our users. // success
+				//libCustList.get(0).getAccountOverview();
+				//libCustList.get(1).getAccountOverview();
+				//libCustList.get(2).getAccountOverview();
+				//libCustList.get(3).getAccountOverview();		
+			
+		}
 }
 

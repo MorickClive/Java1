@@ -1,6 +1,9 @@
 package Library;
 
 import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import Intermediate.*;
 
@@ -85,7 +88,7 @@ public class Library {
 		}
 	}	
 	
-	public void updateItem_objhandler(Item Object, Item sampleObject){
+	private void updateItem_objhandler(Item Object, Item sampleObject){
 //		(String title, String material, int price, String genre, boolean isHardback)
 		if(Object instanceof Book && sampleObject instanceof Book){ 	((Book)Object).updateItem(	sampleObject.getTitle(),
 																	sampleObject.getItem_Type(),
@@ -142,7 +145,6 @@ public class Library {
 		
 		return null; // error
 	}
-
 	
 	// Library behaviour
 	
@@ -216,7 +218,9 @@ public class Library {
 					}
 			}
 			
+			
 			System.out.println("Thank you for returning: '"+itm.getTitle()+"'.\n" + getCustomer(itm.getCustomer_ID()).getName() + "'s account has now been updated.\n");
+			itm.setCustomer_ID(0);
 			lender.getAccountOverview();
 		}
 		else{ 
@@ -227,4 +231,98 @@ public class Library {
 				
 	}
 
+	
+	public ArrayList<Item> FileLineReader(String filename)
+	{
+		ArrayList<Item> myList = new ArrayList<>();
+		BufferedReader br = null;
+	
+		try{
+			br = new BufferedReader(new FileReader(filename));
+			String line;
+			String[] storedLine;
+			
+			Book bk = new Book();
+			Map Mp = new Map();
+			Media Med = new Media();
+			
+			while( (line = br.readLine()) != null)
+			{
+				storedLine = line.split(":"); // here data is extracted into components per line.
+				//System.out.println(storedLine[0]); // debug
+				
+				if(storedLine[0].length() > 1 && storedLine[1].equals("Book")){
+					//System.out.println("Reading a book."); // debug
+					
+					bk.setID(Integer.parseInt(br.readLine().split(":")[1]));
+					bk.setTitle(br.readLine().split(":")[1]);
+					bk.setItem_Type(br.readLine().split(":")[1]);
+					bk.setMaterial(br.readLine().split(":")[1]);
+					bk.setCustomer_ID(Integer.parseInt(br.readLine().split(":")[1]));
+					bk.setLoaned(br.readLine().split(":")[1].equals("true") ? true : false);
+					bk.setDaysLoaned(Integer.parseInt(br.readLine().split(":")[1]));
+					bk.setMaxLoan(Integer.parseInt(br.readLine().split(":")[1]));
+					bk.setGenre(br.readLine().split(":")[1]);
+					bk.setHardback(br.readLine().split(":")[1] == "true" ? true : false);
+					myList.add(bk);
+					
+					bk = new Book(); // ensure we are working with a fresh instance.
+				}
+				if(storedLine.length > 1 && storedLine[1].equals("Map")){
+					//System.out.println("Reading a map."); // debug
+					
+					Mp.setID(Integer.parseInt(br.readLine().split(":")[1]));
+					Mp.setTitle(br.readLine().split(":")[1]);
+					Mp.setItem_Type(br.readLine().split(":")[1]);
+					Mp.setMaterial(br.readLine().split(":")[1]);
+					Mp.setCustomer_ID(Integer.parseInt(br.readLine().split(":")[1]));
+					Mp.setLoaned(br.readLine().split(":")[1].equals("true") ? true : false);
+					Mp.setDaysLoaned(Integer.parseInt(br.readLine().split(":")[1]));
+					Mp.setMaxLoan(Integer.parseInt(br.readLine().split(":")[1]));
+					Mp.setLocation(br.readLine().split(":")[1]);
+					Mp.setLanguage(br.readLine().split(":")[1]);
+					myList.add(Mp);
+					
+					Mp = new Map(); // ensure we are working with a fresh instance.
+				}
+				if(storedLine.length > 1 && storedLine[1].equals("Media")){
+					// System.out.println("Reading a media."); // debug
+					
+					Med.setID(Integer.parseInt(br.readLine().split(":")[1]));
+					Med.setTitle(br.readLine().split(":")[1]);
+					Med.setItem_Type(br.readLine().split(":")[1]);
+					Med.setMaterial(br.readLine().split(":")[1]);
+					Med.setCustomer_ID(Integer.parseInt(br.readLine().split(":")[1]));
+					Med.setLoaned(br.readLine().split(":")[1].equals("true") ? true : false);
+					Med.setDaysLoaned(Integer.parseInt(br.readLine().split(":")[1]));
+					Med.setMaxLoan(Integer.parseInt(br.readLine().split(":")[1]));
+					Med.setDescription(br.readLine().split(":")[1]);
+					myList.add(Med);
+					
+					Med = new Media(); // ensure we are working with a fresh instance.
+				}
+			}
+		
+			
+		}catch(IOException ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			// close the file
+			try{
+			br.close();
+			}catch(IOException ex)
+			{ex.printStackTrace();}
+		}
+		System.out.println("File read successfull!");
+		
+		// for Debugging purposes.
+//		for(int x = 0; x < myList.size(); x++){
+//			System.out.println(myList.get(x).detailsFormated());
+//		}
+		
+		return myList;
+	}	
 }
