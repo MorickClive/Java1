@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import BattleShip.BattleShips;
+
 public class Advanced extends Common {
 
 	public Advanced()
@@ -19,8 +21,9 @@ public class Advanced extends Common {
 		print("This is the Advanced section.\n");
 
 		//primeNumbers(1000);
+		//hashScope();
 		
-		hashScope();
+		BattleShips x = new BattleShips();
 		
 		print("Advanced tasks are over.\n\n");
 	}
