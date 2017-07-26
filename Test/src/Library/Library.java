@@ -254,16 +254,16 @@ public class Library {
 				if(storedLine[0].length() > 1 && storedLine[1].equals("Book")){
 					//System.out.println("Reading a book."); // debug
 					
-					bk.setID(Integer.parseInt(br.readLine().split(":")[1]));
-					bk.setTitle(br.readLine().split(":")[1]);
-					bk.setItem_Type(br.readLine().split(":")[1]);
-					bk.setMaterial(br.readLine().split(":")[1]);
-					bk.setCustomer_ID(Integer.parseInt(br.readLine().split(":")[1]));
-					bk.setLoaned(br.readLine().split(":")[1].equals("true") ? true : false);
-					bk.setDaysLoaned(Integer.parseInt(br.readLine().split(":")[1]));
-					bk.setMaxLoan(Integer.parseInt(br.readLine().split(":")[1]));
-					bk.setGenre(br.readLine().split(":")[1]);
-					bk.setHardback(br.readLine().split(":")[1] == "true" ? true : false);
+					bk.setID(Integer.parseInt(			br.readLine().split(":")[1]));
+					bk.setTitle(						br.readLine().split(":")[1]);
+					bk.setItem_Type(					br.readLine().split(":")[1]);
+					bk.setMaterial(						br.readLine().split(":")[1]);
+					bk.setCustomer_ID(Integer.parseInt(	br.readLine().split(":")[1]));
+					bk.setLoaned(						br.readLine().split(":")[1].equals("true") ? true : false);
+					bk.setDaysLoaned(Integer.parseInt(	br.readLine().split(":")[1]));
+					bk.setMaxLoan(Integer.parseInt(		br.readLine().split(":")[1]));
+					bk.setGenre(						br.readLine().split(":")[1]);
+					bk.setHardback(						br.readLine().split(":")[1].equals("true") ? true : false);
 					myList.add(bk);
 					
 					bk = new Book(); // ensure we are working with a fresh instance.
@@ -272,15 +272,15 @@ public class Library {
 					//System.out.println("Reading a map."); // debug
 					
 					Mp.setID(Integer.parseInt(br.readLine().split(":")[1]));
-					Mp.setTitle(br.readLine().split(":")[1]);
-					Mp.setItem_Type(br.readLine().split(":")[1]);
-					Mp.setMaterial(br.readLine().split(":")[1]);
-					Mp.setCustomer_ID(Integer.parseInt(br.readLine().split(":")[1]));
-					Mp.setLoaned(br.readLine().split(":")[1].equals("true") ? true : false);
-					Mp.setDaysLoaned(Integer.parseInt(br.readLine().split(":")[1]));
-					Mp.setMaxLoan(Integer.parseInt(br.readLine().split(":")[1]));
-					Mp.setLocation(br.readLine().split(":")[1]);
-					Mp.setLanguage(br.readLine().split(":")[1]);
+					Mp.setTitle(						br.readLine().split(":")[1]);
+					Mp.setItem_Type(					br.readLine().split(":")[1]);
+					Mp.setMaterial(						br.readLine().split(":")[1]);
+					Mp.setCustomer_ID(Integer.parseInt(	br.readLine().split(":")[1]));
+					Mp.setLoaned(						br.readLine().split(":")[1].equals("true") ? true : false);
+					Mp.setDaysLoaned(Integer.parseInt(	br.readLine().split(":")[1]));
+					Mp.setMaxLoan(Integer.parseInt(		br.readLine().split(":")[1]));
+					Mp.setLocation(						br.readLine().split(":")[1]);
+					Mp.setLanguage(						br.readLine().split(":")[1]);
 					myList.add(Mp);
 					
 					Mp = new Map(); // ensure we are working with a fresh instance.
@@ -288,15 +288,15 @@ public class Library {
 				if(storedLine.length > 1 && storedLine[1].equals("Media")){
 					// System.out.println("Reading a media."); // debug
 					
-					Med.setID(Integer.parseInt(br.readLine().split(":")[1]));
-					Med.setTitle(br.readLine().split(":")[1]);
-					Med.setItem_Type(br.readLine().split(":")[1]);
-					Med.setMaterial(br.readLine().split(":")[1]);
+					Med.setID(Integer.parseInt(			br.readLine().split(":")[1]));
+					Med.setTitle(						br.readLine().split(":")[1]);
+					Med.setItem_Type(					br.readLine().split(":")[1]);
+					Med.setMaterial(					br.readLine().split(":")[1]);
 					Med.setCustomer_ID(Integer.parseInt(br.readLine().split(":")[1]));
-					Med.setLoaned(br.readLine().split(":")[1].equals("true") ? true : false);
-					Med.setDaysLoaned(Integer.parseInt(br.readLine().split(":")[1]));
-					Med.setMaxLoan(Integer.parseInt(br.readLine().split(":")[1]));
-					Med.setDescription(br.readLine().split(":")[1]);
+					Med.setLoaned(						br.readLine().split(":")[1].equals("true") ? true : false);
+					Med.setDaysLoaned(Integer.parseInt(	br.readLine().split(":")[1]));
+					Med.setMaxLoan(Integer.parseInt(	br.readLine().split(":")[1]));
+					Med.setDescription(					br.readLine().split(":")[1]);
 					myList.add(Med);
 					
 					Med = new Media(); // ensure we are working with a fresh instance.

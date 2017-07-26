@@ -2,6 +2,8 @@ package BattleShip;
 
 import java.util.ArrayList;
 
+import Common.Vector2f;
+
 public class Ocean {
 	
 	private static int totalID = 0;
@@ -17,14 +19,10 @@ public class Ocean {
 		totalID++;
 		setID(totalID);
 	}
-	public Ocean(int gridSize, Player owner){
+	public Ocean(int gridSize){
 		setTerrainMatrix(new boolean[gridSize][gridSize]);
 		totalID++;
 		setID(totalID);
-		this.owner = owner;
-		
-		boatList.add(new Boat(new int[][] {{1},{1}},0,1));
-		setTerrainMatrix(new boolean[][] {{false,true},{false,true}});
 	}
 	
 	// Accessors
@@ -44,9 +42,28 @@ public class Ocean {
 		return boatList; 
 	}
 	
+	// adds boat to visual grid
+	public void popGrid(){
+		Boat handle;
+		Vector2f drHandle;
+		// now we can apply a valid boat to the grid
+		for(int x = 0; x < getBoatList().size(); x++){
+			handle = boatList.get(x);
+			//Vector2f gridOffset = Vector2f.subtract(handle.pos, new Vector2f(1,1));
+			drHandle = Vector2f.add(handle.pos, handle.direction);
+			// Store references to the grid locations.
+			terrainMatrix[handle.pos.x][handle.pos.y] = true;
+			
+			for(int y = 0; y < handle.length -1; y++){
+				terrainMatrix[drHandle.x][drHandle.y] = true;
+				drHandle = Vector2f.add(drHandle, handle.direction);
+			}
+		}
+	}
+	
+	// prints visual of the battle field.
 	public void printGrid(){
-		
-		System.out.println("Printing terrain grid: " + ID + ", this grid belongs to player: " + owner.getID());				
+		System.out.println("Printing terrain grid: " + ID + ", this grid belongs to player: ");				
 		for(int x = 0; x < terrainMatrix.length ;x++, System.out.println()){
 			for(int j = 0; j < terrainMatrix.length; j++){
 				System.out.print("\t"+(terrainMatrix[j][x] ? 1 : 0));

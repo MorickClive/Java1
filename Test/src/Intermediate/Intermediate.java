@@ -248,14 +248,15 @@ public class Intermediate extends Common  {
 			libSystems.checkOutItem(libList.get(3), libCustList.get(0));
 			
 			// Let's write a list of all Items. // success
-			FileWriter(libSystems.getItemSections());
+			//FileWriter(libSystems.getItemSections());
 			libList = libSystems.FileLineReader("Item_list.txt");
 			libSystems.checkInItem(libList.get(3));
 			
-			System.out.println(libList.get(0).detailsFormated());
-			System.out.println(libList.get(1).detailsFormated());
-			System.out.println(libList.get(2).detailsFormated());
-			System.out.println(libList.get(3).detailsFormated());
+			
+			for(int x = 0; x < libList.size(); x++){
+				System.out.println(libList.get(x).detailsFormated());
+			}
+
 		
 			
 			// let's check if we can change Dave's details // success

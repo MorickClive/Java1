@@ -1,47 +1,69 @@
-Type :Book
-ID:1
-Title:The Wonders of Seashells
-item_Type:Book
-material:Paper
-customer ID:0
-isLoaned:false
-daysLoaned:0
-maxLoan:15
-genre:Adventure
-hardBack:true
-
-Type :Media
-ID:2
-Title:Digital Soundtrack|| Flickswitch (2010)
-item_Type:Media
-material:Plastic
-customer ID:0
-isLoaned:false
-daysLoaned:0
-maxLoan:15
-description:A soundtrack from a popular scifi film, released in 2010. Electronic, Drums and Bass.:
-
-Type :Map
-ID:3
-Title:Atlas of Germany
-item_Type:Map
-material:Paper
-customer ID:1
-isLoaned:true
-daysLoaned:0
-maxLoan:15
-location:Germany
-language:English
-
-Type :Book
-ID:4
-Title:Chuckles trip
-item_Type:Book
-material:Paper
-customer ID:1
-isLoaned:true
-daysLoaned:0
-maxLoan:15
-genre:Action
-hardBack:true
-
+	Type :Book
+	ID:1
+	Title:The Wonders of Seashells
+	item_Type:Book
+	material:Paper
+	customer ID:0
+	isLoaned:false
+	daysLoaned:0
+	maxLoan:15
+	genre:Adventure
+	hardBack:true
+	
+	Type :Media
+	ID:2
+	Title:Digital Soundtrack|| Flickswitch (2010)
+	item_Type:Media
+	material:Plastic
+	customer ID:0
+	isLoaned:false
+	daysLoaned:0
+	maxLoan:15
+	description:A soundtrack from a popular scifi film, released in 2010. Electronic, Drums and Bass.:
+	
+	Type :Map
+	ID:3
+	Title:Atlas of Germany
+	item_Type:Map
+	material:Paper
+	customer ID:1
+	isLoaned:true
+	daysLoaned:0
+	maxLoan:15
+	location:Germany
+	language:English
+	
+	Type :Book
+	ID:4
+	Title:Chuckles trip
+	item_Type:Book
+	material:Paper
+	customer ID:1
+	isLoaned:true
+	daysLoaned:0
+	maxLoan:15
+	genre:Action
+	hardBack:true
+	
+	Type :Book
+	ID:5
+	Title:Dave the book
+	item_Type:Book
+	material:Wax paper
+	customer ID:0
+	isLoaned:false
+	daysLoaned:0
+	maxLoan:15
+	genre:Farming
+	hardBack:false
+	
+	Type :Media
+	ID:6
+	Title:TEXT ADVENTURE || THE GAME (CAVE EDITION)
+	item_Type:Media
+	material:Plastic
+	customer ID:0
+	isLoaned:false
+	daysLoaned:0
+	maxLoan:15
+	description:A historical example of video games and programming for entertainment purposes.:
