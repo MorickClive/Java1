@@ -6,6 +6,8 @@ git config --global user.email (email)
 git config --global user.name (name)
 git commit -m "push desc"
 
+git pull - update all code.
+
 git remote add origin
 git push -u origin master
 
