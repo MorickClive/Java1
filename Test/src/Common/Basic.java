@@ -11,6 +11,8 @@ public class Basic extends Common {
 	
 	public void start(){
 		print("This is the Basics section.\n");
+		// uncomment methods to access functionality
+		
 		// -- hello world section
 			//print("Hello World!"); 
 			//System.out.println(helloWorld());

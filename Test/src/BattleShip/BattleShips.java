@@ -22,8 +22,8 @@ public class BattleShips extends Common {
 	
 	public void start(){		
 		// I like the idea of "local" globals
-		boolean gameActive = false;
-		int gridSize = 5;
+		boolean gameActive = true;
+		int gridSize = 12;
 		Player P1, P2;
 		
 		// This sets up the players, the rules and the basis of each game	
@@ -46,7 +46,7 @@ public class BattleShips extends Common {
 			//gameActive = P2.updateBoats();
 			// my exit condition
 			// We update both Players, should either have no boats left, we will terminate the loop.
-			//gameActive = P1.updateBoats() && P2.updateBoats() ? true : false ;
+			gameActive = P1.updateBoats() && P2.updateBoats() ? true : false;
 			//gameActive = !gameActive;
 		}
 		
@@ -57,19 +57,46 @@ public class BattleShips extends Common {
 		Player P1, P2; // Local copies for reference to different players
 		
 		//P1 details
-		playerList.put(1, new Player(gridSize));
-		P1 = playerList.get(1);
-		//P1.addBoat(b);
-		P1.addBoat(new Boat(new Vector2f(1,0), Vector2f.RIGHT(), 4));
-		P1.getGrid().printGrid();
-		System.out.println(P1.getGrid().getBoatList().get(0).mapPositions.size());
+			playerList.put(1, new Player(gridSize));
+			P1 = playerList.get(1);
+			//P1.addBoat(b);
+			P1.addBoat(new Boat(new Vector2f(0,3), Vector2f.DOWN(), 2));
+			P1.addBoat(new Boat(new Vector2f(2,2), Vector2f.RIGHT(), 2));
+			P1.addBoat(new Boat(new Vector2f(8,8), Vector2f.UP(), 3));
+			
+			P1.addBoat(new Boat(new Vector2f(5,3), Vector2f.UP(), 3));
+			P1.addBoat(new Boat(new Vector2f(6,6), Vector2f.RIGHT(), 3));
+			P1.addBoat(new Boat(new Vector2f(1,8), Vector2f.DOWN(), 4));
+			
+			P1.addBoat(new Boat(new Vector2f(11,7), Vector2f.DOWN(), 5));
+			
+			P1.getGrid().printGrid();
 		
 		//P2 details
-		playerList.put(2, new Player(gridSize));
-		P2 = playerList.get(2);
-		//P2.addBoat(new Boat(new Vector2f(0,2), Vector2f.UP(), 3));
-		P2.addBoat(new Boat(new Vector2f(0,0), Vector2f.LEFT(), 1));
-		P2.getGrid().printGrid();
+			playerList.put(2, new Player(gridSize));
+			P2 = playerList.get(2);
+			//P2.addBoat(new Boat(new Vector2f(0,2), Vector2f.UP(), 3));
+			P2.addBoat(new Boat(new Vector2f(0,0), Vector2f.RIGHT(), 2));
+			P2.addBoat(new Boat(new Vector2f(2,2), Vector2f.LEFT(), 2));
+			P2.addBoat(new Boat(new Vector2f(1,5), Vector2f.RIGHT(), 3));
+			
+			P2.addBoat(new Boat(new Vector2f(5,3), Vector2f.LEFT(), 3));
+			P2.addBoat(new Boat(new Vector2f(6,6), Vector2f.UP(), 3));
+			P2.addBoat(new Boat(new Vector2f(7,5), Vector2f.RIGHT(), 4));
+			
+			P2.addBoat(new Boat(new Vector2f(11,7), Vector2f.DOWN(), 5));
+			
+			
+			P2.getGrid().printGrid();
+			
+			
+			
+//			2 patrol boats (1 x 2),
+//			 2 battleships (1 x 3),
+//			 1 submarine (1 x 3),
+//			 1 destroyer (1 x 4)
+//			 and 1 carrier (1 x 5).
+
 	}
 	
 	public void playerTurn(Player P, Player Enemy){
@@ -122,7 +149,6 @@ public class BattleShips extends Common {
 			System.out.println("Player " + P.getID() + " fired at: {"+coord.x+", "+ coord.y + "}.");
 			
 			System.out.print("\tBoom"); printDelayed("...\n", 500);
-			Sleep(500);
 			
 			// if we successfully hit, we're still allowed to fire again - let the while loop continue
 			activeTurn = P.shootTarget(Enemy, new Vector2f(coord.x,	coord.y));
@@ -132,7 +158,15 @@ public class BattleShips extends Common {
 					Sleep(500*4);
 				}
 			System.out.println("------------------------\n\n");
+			consoleSpace(20); // space it out by
 			turnTracker++;
+		}
+	}
+	
+	public void consoleSpace(int space){
+		int count = space;
+		for(int x = 0; x < count; x++){
+			System.out.print("\n");
 		}
 	}
 }

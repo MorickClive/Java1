@@ -63,10 +63,19 @@ public class Ocean {
 	
 	// prints visual of the battle field.
 	public void printGrid(){
-		System.out.println("Printing terrain grid: " + ID + ", this grid belongs to player: ");				
+		System.out.println("Printing terrain grid: " + ID + ", this grid belongs to player: ");
+		
+		// Header reference
+		System.out.print("\t");
+		for(int j = 0; j < terrainMatrix.length; j++){
+			System.out.print("\t " + (char)(65+j));
+		}
+		System.out.println();
+		
 		for(int x = 0; x < terrainMatrix.length ;x++, System.out.println()){
 			for(int j = 0; j < terrainMatrix.length; j++){
-				System.out.print("\t"+(terrainMatrix[j][x] ? 1 : 0));
+				if(j == 0) {System.out.print("\t"+x);}
+				System.out.print("\t"+(terrainMatrix[j][x] ? "["+1+"]" : " -"));
 			}
 		}
 		

@@ -3,6 +3,7 @@ package BattleShip;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import Common.Vector2f;
 
@@ -39,8 +40,8 @@ public class Player {
 		
 		if(proceed){
 			grid.getBoatList().add(b);
-			updateBoat(b);
-			grid.popGrid();
+			grid.popGrid(); // visual representation of boat positioning
+			updateBoat(b); // updates values for boats logically
 		}
 		else{
 			System.out.println("Boat placement failed.");			
@@ -52,25 +53,27 @@ public class Player {
 		boolean[][] grid = getGrid().getTerrainMatrix();
 		Vector2f handle = Vector2f.add(b.direction, b.pos);
 		
-		b.mapPositions.add(grid[b.pos.x][b.pos.y]);
-		System.out.println(Vector2f.PRINT(b.pos));
+		b.mapPositions.clear(); // we need to refresh our positions for new updates
 		
-		for(int x = 1; x < b.length; x++){
-			System.out.println(Vector2f.PRINT(handle));
+		// add the origin of the grid to this boat
+		b.mapPositions.add(grid[b.pos.x][b.pos.y]);
+		//System.out.println(Vector2f.PRINT(b.pos));
+		
+		// add the length coordinates to the boat's list
+		for(int x = 0; x < b.length-1; x++){
+			//System.out.println(Vector2f.PRINT(handle));
 			b.mapPositions.add(grid[handle.x][handle.y]);
 			handle = Vector2f.add(handle, b.direction);
 		}
 		
 		// remove any entries that do not match the value "true"
-		
-		for(int x = 0; x < b.length; x++){
-			// should the value we have stored be false - we know we've been hit.
-			if(b.mapPositions.get(x) == false) { b.mapPositions.remove(x);	} 
+		Iterator I = b.mapPositions.iterator(); // ensure we don't skip anything in the list.
+		while(I.hasNext()){
+			if((boolean) I.next() == false){I.remove();}
 		}
 		
 		// if we have no valid positions, we are dead
 		b.setAlive( b.mapPositions.size() <= 0 ? false : true);
-		if(!b.isAlive()){System.out.println("Ship is dead.");}
 		
 	}
 	
@@ -123,6 +126,7 @@ public class Player {
 		
 		boolean [][] grid = targ.getGrid().getTerrainMatrix();
 		
+		
 		if(grid[pos.x][pos.y] == true) {
 			grid[pos.x][pos.y] = false;
 			System.out.println("Player " + getID() + " hit Player " + targ.getID() + "'s ships.");
@@ -139,16 +143,22 @@ public class Player {
 	
 	public boolean updateBoats(){
 		totalShips = 0;		
+		ArrayList<Boat> handle_BoatList = getGrid().getBoatList();
 		
-		for(int x = 0; x < getGrid().getBoatList().size(); x++){
-			updateBoat(getGrid().getBoatList().get(x));
-			totalShips += getGrid().getBoatList().get(x).isAlive() ? 1 : 0;
+		for(int x = 0; x < handle_BoatList.size(); x++){
+			updateBoat(handle_BoatList.get(x));
+			totalShips += handle_BoatList.get(x).isAlive() ? 1 : 0;
 		}
+		
+		// REPORT!
+		System.out.println("Player " +getID()+" has " + totalShips + (totalShips == 1 ? " ship left." : " ships left."));
 		
 		if(totalShips <= 0){
-			System.out.println("A player died.");
+			System.out.println("Player "+getID()+" has died.");
 			return false;
 		}
+		
+		grid.printGrid();
 		
 		return true;
 	}

@@ -22,34 +22,35 @@ public class Intermediate extends Common  {
 	
 	static void Start(){
 		print("This is the Intermediate section.\n");
+		// uncomment methods to access functionality		
 		
-		//print(blackJack(18,21)); // -- backjack
-		//print(blackJack(20,18)); // -- ^^
-		//print(blackJack(22,22)); // -- ^^
-		
-		//print(uniqueSum(1,2,3)); // -- UniqueSum
-		//print(uniqueSum(3,3,3)); // -- ^^
-		//print(uniqueSum(1,1,2)); // -- ^^
+			//print(blackJack(18,21)); // -- backjack
+			//print(blackJack(20,18)); // -- ^^
+			//print(blackJack(22,22)); // -- ^^
+			
+			//print(uniqueSum(1,2,3)); // -- UniqueSum
+			//print(uniqueSum(3,3,3)); // -- ^^
+			//print(uniqueSum(1,1,2)); // -- ^^
 		
 		// --  TOO HOT (or too cold; it really doesn't discern cold too well).
-		/* 
-		print(tooHot(90, false) ? 
-				"True" :
-				"False");
-		 */
+			/* 
+			print(tooHot(90, false) ? 
+					"True" :
+					"False");
+			 */
 		
-		//people(); //-- Person class
-		//garageTest(); //-- Garage and Vehicle class
-		//Sleep(500);
+			//people(); //-- Person class
+			//garageTest(); //-- Garage and Vehicle class
+			//Sleep(500);
 		
-		//paintWizard();
-		//Sleep(500);
+			//paintWizard();
+			//Sleep(500);
 		
-		//writeEmployeeList();
-		//Sleep(500);
+			//writeEmployeeList();
+			//Sleep(500);
 		
 		// Tests the Library system out
-		librarySystem();
+			//librarySystem();
 		
 		print("Intermediate tasks are over.\n\n");
 	}

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,11 +20,15 @@ public class Advanced extends Common {
 	
 	static void Start(){
 		print("This is the Advanced section.\n");
-
-		//primeNumbers(1000);
-		//hashScope();
+		// uncomment methods to access functionality
 		
-		BattleShips x = new BattleShips();
+		// PrimeNumber test
+			//primeNumbers(1000000);
+		// HashMap
+			//hashScope();
+		
+		// Task BattleShips
+			//BattleShips x = new BattleShips();
 		
 		print("Advanced tasks are over.\n\n");
 	}
@@ -43,6 +48,9 @@ public class Advanced extends Common {
 	static void primeNumbers(float upperLimit){
 		
 		int count = 0;
+		Timer t = new Timer();
+		
+		t.startTimer("Prime number Timer.");
 		
 		System.out.println("--- Prime Number test ---");
 		// consider applying the process into a multi-threaded environment to boost performance
@@ -51,46 +59,85 @@ public class Advanced extends Common {
 		}
 		print("Then number of prime numbers within " + upperLimit + ", is " + count + ".");
 		System.out.println("--- Prime Number test done!! ---");
+		t.stopTimer();
+		System.out.println("ms: " +t.time);
 	}
 
 	static void hashScope(){
-		ArrayList<String> fileData = FileLineReader("WordSort.txt");
-		char[] y;
-		for(int x = 0; x < fileData.size(); x++){
+		// Get our data in
+		ArrayList<String> fileData = FileLineReader("DOG_CLASS.txt"); // is an Animal, maybe; x.bark(); (PS: is the word list file)
+		char[] y; // prepare for sorting without initialising every loop.
+		ArrayList<String> fileDataSorted = new ArrayList<>(); // I need a seperate list, but I can terminate the non-sorted list to free up data.
+		LinkedHashMap<String, Integer> hashmap = new LinkedHashMap<>(); // my values need to conform a hashmap type, this will allow me to utilise the benefits of this method of data storage.
+		
+		// How big is our word list?
+			System.out.println("Read in: " + fileData.size() + " words in list.");
+		// Let's convert the data to a sorted format.
+			// exposing the anagram.
+			for(int x = 0; x < fileData.size(); x++){
+				y = fileData.get(x).toLowerCase().toCharArray();
+				Arrays.sort(y);
+				fileDataSorted.add(new String(y));
+			}
+		// fileDataSorted makes fileData redundant - let's flush
+			fileData.clear();
+	
 			
-			y = fileData.get(x).toLowerCase().toCharArray();
-			Arrays.sort(y);
-			System.out.println(new String(y));
-		}
+			System.out.println("2nd loop: HashMap insertion.");
 		
-		System.out.println();
+		// record how many instances of an anagram exists, store with the value associated.
+			for(int x = 0; x < fileDataSorted.size(); x++){
+				if(hashmap.containsKey(fileDataSorted.get(x))){
+					hashmap.put(fileDataSorted.get(x),  hashmap.get(fileDataSorted.get(x)) +1);
+				}else{
+					hashmap.put(fileDataSorted.get(x), 0);
+				}
+				
+			}
+		// how big is our hashmap
+			System.out.println("HashMap size: " + hashmap.size() + " Entries.");
+			System.out.println();	
+		// Find the sample which has the highest value
+			Set set = hashmap.entrySet();
+			Iterator i = set.iterator();
+			Map.Entry sample;
 		
-		LinkedHashMap  x = new LinkedHashMap();
-		
-		x.put("Monday", 6.5f);
-		x.put("Tuesday", 7.5f);
-		x.put("Wednesday", 7.5f);
-		x.put("Thursday", 7.5f);
-		x.put("Friday", 6.5f);
-		x.put("Saturday", 0f);
-		x.put("Sunday", 0f);
-		
-		Set set = x.entrySet();
-		
-		Iterator i = set.iterator();
-		
-		while(i.hasNext()){
-			Map.Entry sample = (Map.Entry)i.next();
-			//System.out.print(sample.getKey() + ": ");
-			printDelayed(	sample.getKey() + ": "+ sample.getValue() +
-							" hours.\n", 125);
-			Sleep(500);
+			int TopVal = 0;
+			String ID = "";
 			
-		}
-		System.out.println();
+			while(i.hasNext()){
+				sample = (Map.Entry)i.next();
+				// print(	sample.getKey() + " : "+ sample.getValue());
+				if ((int)sample.getValue() >= TopVal){
+					ID = (String)sample.getKey(); TopVal = (int)sample.getValue();
+				}
+			}
+			System.out.println("ID: " + ID + ", val: " + TopVal);
+
+		// top value found
+			System.out.println();
 		
 	}
 }
+
+
+// element from Elliot's code sample.
+	class Timer {
+		public double time;
+		public String message;
+	
+		public Timer(){}
+		
+		public void startTimer(String message) {
+			this.message = message;
+			this.time = System.currentTimeMillis();
+			System.out.println("Started: " + this.message);
+		}
+		public void stopTimer() {
+			double time = (System.currentTimeMillis() - this.time);
+			System.out.println("Finished: " + this.message + " In: " + time);
+		}
+	}
 
 /*
  function primeTest(x)
